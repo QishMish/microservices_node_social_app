@@ -3,11 +3,16 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     static associate(models) {
-      this.belongsToMany(models.PostLike,{
-        through:"post_likes",
-        foreignKey:"post_id",
-        as:"likes"
-      })
+      this.hasMany(models.Comment, {
+        foreignKey: "post_id",
+        sourceKey: "uuid",
+        as: "comments",
+      });
+      this.belongsToMany(models.PostLike, {
+        through: "post_likes",
+        foreignKey: "post_id",
+        as: "likes",
+      });
     }
   }
   Post.init(
