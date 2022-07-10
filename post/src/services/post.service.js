@@ -1,5 +1,9 @@
-const { Post } = require("../models");
+const { Post, PostLike } = require("../models");
 const { v4: uuidv4 } = require("uuid");
+const { getMethods } = require("../utils/helpers");
+const {
+  throwHttpException,
+} = require("../../../newsFeed/src/exceptions/http.exception");
 
 const getPostById = async (postId) => {
   const post = await Post.findOne({
@@ -74,6 +78,52 @@ const deletePost = async (postId, userId) => {
     post: post,
   };
 };
+const likePost = async (postId, userId) => {
+  const post = await Post.findOne({
+    where: {
+      uuid: postId,
+    },
+  });
+  if (!post) throwHttpException(404, "Post not found");
+  
+  const liked = await PostLike.findOne({
+    where: {
+      post_id: postId,
+      user_id: userId,
+    },
+  });
+
+  if (liked) {
+    await Post.decrement("likes_count", {
+      by: 1,
+      where: {
+        uuid: postId,
+      },
+    });
+    await liked.destroy();
+  } else {
+    await Post.increment("likes_count", {
+      by: 1,
+      where: {
+        uuid: postId,
+      },
+    });
+    await PostLike.create({
+      post_id: postId,
+      user_id: userId,
+    });
+  }
+
+  const updatedPost = await Post.findOne({
+    where: {
+      uuid: postId,
+    },
+  });
+
+  return {
+    post: updatedPost,
+  };
+};
 
 module.exports = {
   createPost,
@@ -82,4 +132,5 @@ module.exports = {
   deletePost,
   updatePost,
   getMyPosts,
+  likePost,
 };

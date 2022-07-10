@@ -2,7 +2,9 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
-    static associate(models) {}
+    static associate(models) {
+      this.belongsTo(models.Post, { foreignKey: "post_id" });
+    }
   }
   Comment.init(
     {
@@ -16,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       post_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
       },
     },
     {

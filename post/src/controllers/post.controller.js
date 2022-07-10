@@ -45,6 +45,15 @@ const deletePost = async (req, res) => {
 
   res.status(201).json(response);
 };
+const likePost = async (req, res) => {
+  const { id: userId } = req.user;
+  const { postId } = req.params;
+
+  const response = await postService.likePost(postId, userId);
+
+  res.status(201).json(response);
+};
+
 
 module.exports = {
   createPost,
@@ -53,4 +62,5 @@ module.exports = {
   deletePost,
   updatePost,
   getMyPosts,
+  likePost
 };
