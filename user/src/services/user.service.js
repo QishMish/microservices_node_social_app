@@ -16,7 +16,6 @@ const createUser = async (userFields) => {
     user: user,
   };
 };
-
 const getAll = async () => {
   const users = await User.findAll({});
   return {
@@ -55,7 +54,6 @@ const getUserByUserName = async (username) => {
     user: user,
   };
 };
-
 const updateUser = async (userUUID, userFields) => {
   const { username, email, verified, status } = userFields;
 
