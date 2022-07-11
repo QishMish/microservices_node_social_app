@@ -1,4 +1,4 @@
-const { Post, Comment } = require("../models");
+const { Post, Comment, User } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
 const getPostWithComments = async (postUUID) => {
@@ -18,12 +18,16 @@ const getPostWithComments = async (postUUID) => {
 
   const post = await Post.findOne({
     where: {
-      uuid: postCreated.uuid,
+      uuid: postUUID,
     },
     include: [
       {
         model: Comment,
         as: "comments",
+        include: [User],
+      },
+      {
+        model: User,
       },
     ],
   });
@@ -31,7 +35,25 @@ const getPostWithComments = async (postUUID) => {
     post: post,
   };
 };
+const getAllPostsWithComments = async () => {
+  const posts = await Post.findAll({
+    include: [
+      {
+        model: Comment,
+        as: "comments",
+        include: [User],
+      },
+      {
+        model: User,
+      },
+    ],
+  });
+  return {
+    posts: posts,
+  };
+};
 
 module.exports = {
   getPostWithComments,
+  getAllPostsWithComments,
 };

@@ -7,7 +7,14 @@ const getPostWithComments = async (req, res) => {
 
   res.status(200).json(result);
 };
+const getAllPostsWithComments = async (req, res) => {
+
+  const result = await newFeedService.getAllPostsWithComments();
+
+  res.status(200).json(result);
+};
 
 module.exports = {
   getPostWithComments,
+  getAllPostsWithComments
 };

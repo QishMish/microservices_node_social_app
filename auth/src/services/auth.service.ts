@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
 
 import emailQueue from "./../utils/jobs/queues/email.queues";
 import HttpException from "../exceptions/http.exception";
@@ -49,6 +50,7 @@ const refresh = async (refreshToken: string): Promise<IAuthGenericResponse> => {
   const newAccessToken = await signJwt(
     {
       id: user.id,
+      uuid:user.uuid,
       email: user.email,
       username: user.username,
       verified: user.verified,
@@ -88,6 +90,7 @@ const signUp = async (userData: ISignUpUserDto): Promise<ISignUpResponse> => {
 
   const user = await userRepo.create({
     data: {
+      uuid:uuidv4(),
       email,
       username,
       password: hashedPassword,
@@ -115,6 +118,7 @@ const signUp = async (userData: ISignUpUserDto): Promise<ISignUpResponse> => {
   const accessToken = await signJwt(
     {
       id: user.id,
+      uuid:user.uuid,
       email: user.email,
       username: user.username,
       verified: user.verified,
@@ -125,6 +129,7 @@ const signUp = async (userData: ISignUpUserDto): Promise<ISignUpResponse> => {
   const refreshToken = await signJwt(
     {
       id: user.id,
+      uuid:user.uuid,
       email: user.email,
       username: user.username,
       verified: user.verified,
@@ -177,6 +182,7 @@ const signIn = async (userData: ISignInUserDto): Promise<ISignInResponse> => {
   const accessToken = await signJwt(
     {
       id: user.id,
+      uuid:user.uuid,
       email: user.email,
       username: user.username,
       verified: user.verified,
@@ -187,6 +193,7 @@ const signIn = async (userData: ISignInUserDto): Promise<ISignInResponse> => {
   const refreshToken = await signJwt(
     {
       id: user.id,
+      uuid:user.uuid,
       email: user.email,
       username: user.username,
       verified: user.verified,
@@ -359,5 +366,5 @@ export default {
   signOut,
   resetPassword,
   confirmResetPassword,
-  ckeckAuth
+  ckeckAuth,
 };

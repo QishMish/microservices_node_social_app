@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "post_id",
         as: "likes",
       });
+      this.belongsTo(models.User, { foreignKey: "user_id", targetKey: "uuid" });
     }
   }
   Post.init(
@@ -37,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
       },
     },
     {
