@@ -1,10 +1,11 @@
 -- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
+    "uuid" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "verified" BOOLEAN DEFAULT false,
+    "verified" BOOLEAN NOT NULL DEFAULT false,
     "reset_token" TEXT,
     "reset_token_expries_at" TIMESTAMP(3),
     "verification_token" TEXT,

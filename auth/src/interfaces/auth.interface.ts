@@ -15,6 +15,7 @@ export interface ISignInResponse extends IAuthGenericResponse {
 }
 export interface IMe {
   id: number;
+  uuid:string,
   email: string;
   username: string;
   verified: boolean;
