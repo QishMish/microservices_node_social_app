@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       user_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       post_id: {
         type: Sequelize.UUID,
