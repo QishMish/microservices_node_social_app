@@ -8,7 +8,9 @@ const {
   updateUser,
   deleteUser,
   getUserByUserName,
-  addFriend
+  addFriend,
+  follow,
+  getFollowers
 } = userController;
 
 userRoutes.post("/create", createUser);
@@ -18,5 +20,7 @@ userRoutes.get("/", getAll);
 userRoutes.patch("/update/:userUUId", updateUser);
 userRoutes.delete("/delete/:userUUId", deleteUser);
 userRoutes.post("/addfriend", addFriend);
+userRoutes.post("/follow", follow);
+userRoutes.get("/:userId/followers", getFollowers);
 
 module.exports = userRoutes;

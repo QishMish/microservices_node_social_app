@@ -36,13 +36,21 @@ const deleteUser = async (req, res) => {
   const response = await userService.deleteUser(userUUId);
   res.status(200).json(response);
 };
-
 const addFriend = async (req, res) => {
   const { requesterId, addresseeId } = req.body;
   const response = await friendShipService.addFriend(requesterId, addresseeId);
   res.status(201).json(response);
 };
-
+const follow = async (req, res) => {
+  const { followerId, followingId } = req.body;
+  const response = await userService.follow(followerId, followingId);
+  res.status(201).json(response);
+};
+const getFollowers = async (req, res) => {
+  const { userId } = req.params;
+  const response = await userService.getFollowers(userId);
+  res.status(201).json(response);
+};
 module.exports = {
   createUser,
   getAll,
@@ -51,4 +59,6 @@ module.exports = {
   deleteUser,
   getUserByUserName,
   addFriend,
+  follow,
+  getFollowers
 };
