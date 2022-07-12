@@ -16,4 +16,12 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: qishhub/user-image
+      context: user
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
 

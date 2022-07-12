@@ -20,14 +20,14 @@ spec:
             - containerPort: 5432
           envFrom:
             - configMapRef:
-                name: postgres-secret
+                name: auth-postgres-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgresdata
+              name: authpostgresdata
       volumes:
-        - name: postgresdata
+        - name: authpostgresdata
           persistentVolumeClaim:
-            claimName: postgres-volume-claim
+            claimName: auth-postgres-volume-claim
 ---
 apiVersion: v1
 kind: Service
@@ -37,7 +37,7 @@ spec:
   selector:
     app: auth-postgres
   ports:
-    - name: Auth
+    - name: auth
       protocol: TCP
       port: 5432
       targetPort: 5432

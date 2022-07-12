@@ -8,10 +8,10 @@ const {
 
 module.exports = {
   development: {
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    host: DB_HOST,
+    username: "admin",
+    password: "admin",
+    database: "User",
+    host: "user-postgres-srv",
     dialect: "postgres",
     logging: false,
   },
