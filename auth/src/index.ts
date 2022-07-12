@@ -6,7 +6,7 @@ import logger from "./config/Logger";
 import HttpException from "./exceptions/http.exception";
 
 App.listen(PORT, () => {
-  console.log(`App listening on the port ${PORT}`);
+  console.log(`Auth service listening on the port ${PORT}`);
 });
 
 process.on("uncaughtException", (err, origin) => {
