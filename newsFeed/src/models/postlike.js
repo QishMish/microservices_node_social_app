@@ -1,29 +1,36 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class PostLike extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.Post, {
+        foreignKey: "post_id",
+        targetKey:"uuid",
+        as: "user",
+      });
+      this.belongsTo(models.User, {
+        foreignKey: "user_id",
+        targetKey:"uuid",
+        as:"posts"
+      });
     }
   }
-  PostLike.init({
-    post_id: {
-      type: DataTypes.UUID,
+  PostLike.init(
+    {
+      post_id: {
+        type: DataTypes.UUID,
+        primaryKey:true
+      },
+      user_id: {
+        type: DataTypes.UUID,
+        primaryKey:true
+      },
     },
-    user_id: {
-      type: DataTypes.UUID,
-    },
-  }, {
-    sequelize,
-    modelName: "PostLike",
-    tableName: "post_likes",
-  });
+    {
+      sequelize,
+      modelName: "PostLike",
+      tableName: "post_likes",
+    }
+  );
   return PostLike;
 };

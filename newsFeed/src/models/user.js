@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "uuid",
         as: "posts",
       });
-      this.belongsToMany(models.PostLike, {
-        through: "post_likes",
+      this.hasMany(models.PostLike, {
         foreignKey: "user_id",
-        as: "userLikes",
+        sourceKey: "uuid",
+        as: "likes",
       });
     }
   }

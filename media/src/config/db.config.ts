@@ -1,8 +1,12 @@
 import { DataSource } from "typeorm";
 import "reflect-metadata";
-// import User from "@/resources/user/user.model";
+import Media from "@/entity/Media";
+// import MediaType from "@/entity/MediaType";
+import constants from "./constants";
+import PostMedia from "@/entity/PostMedia";
+import ProfileImage from "@/entity/ProfileImage";
 
-const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env;
+const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = constants;
 
 const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,10 +15,13 @@ const AppDataSource = new DataSource({
   username: DB_USERNAME,
   password: DB_PASSWORD,
   database: DB_NAME,
-  //   logging: true,
+  // logging: true,
   synchronize: true,
   entities: [
-    // User
+    Media,
+    PostMedia,
+    ProfileImage
+    // MediaType
   ],
 });
 export default AppDataSource;

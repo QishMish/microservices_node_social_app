@@ -43,7 +43,6 @@ const fileStorage: StorageEngine = multer.diskStorage({
     file: Express.Multer.File,
     callback: DestinationCallback
   ): void => {
-    console.log(file);
     const dir = "./uploads";
     const imagePath = "./uploads/image";
     const videoPath = "./uploads/video";

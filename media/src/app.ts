@@ -6,7 +6,8 @@ import ErrorMiddleware from "@/middleware/error.middleware";
 import Controller from "@/utils/interfaces/controller.interface";
 import asyncHandler from "express-async-handler";
 import db from "@/config/db.config";
-
+import setCurrentUser from "./middleware/setCurrentUser";
+const cookieParser = require("cookie-parser");
 class App {
   public express: Application;
   public port: number;
@@ -29,13 +30,15 @@ class App {
       })
     );
     this.express.use(function (req, res, next) {
-      res.setHeader('Cross-Origin-Resource-Policy', 'same-site')
-      next()
-    })
+      res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+      next();
+    });
     this.express.use(morgan("dev"));
     this.express.use(express.json());
-    this.express.use(express.urlencoded({ extended: false }));
+    this.express.use(cookieParser());
     this.express.use(express.static("uploads"));
+    this.express.use(setCurrentUser);
+    this.express.use(express.urlencoded({ extended: false }));
     this.express.use(<ErrorRequestHandler>ErrorMiddleware);
   }
 

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: qishhub/auth-image
+          env:
+            - name: PORT
+              value: "4000"
+            - name: AUTH_POSTGRES_URI
+              value: "postgresql://admin:admin@auth-postgres-srv:5432/Auth?schema=public"
+            - name: JWT_ACCESTOKEN_KEY
+              valueFrom:
+               secretKeyRef:
+                name: jwt-secret
+                key: JWT_ACCESTOKEN_KEY
+            - name: JWT_REFRESHTOKEN_KEY
+              valueFrom:
+               secretKeyRef:
+                name: jwt-secret
+                key: JWT_REFRESHTOKEN_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
