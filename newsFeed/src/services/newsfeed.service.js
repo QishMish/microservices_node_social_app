@@ -68,23 +68,6 @@ const getAllPostsWithComments = async () => {
     posts: posts,
   };
 };
-const getAllPostsWithComments = async () => {
-  const posts = await Post.findAll({
-    include: [
-      {
-        model: Comment,
-        as: "comments",
-        include: [User],
-      },
-      {
-        model: User,
-      },
-    ],
-  });
-  return {
-    posts: posts,
-  };
-};
 
 module.exports = {
   getPostWithComments,
