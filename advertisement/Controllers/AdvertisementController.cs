@@ -47,7 +47,7 @@ namespace advertisement.Controllers
         {
             Advertisement advertisementExist = await _context.Advertisement.FindAsync(id);
             if (advertisementExist == null)
-                return BadRequest("Hero not found.");
+                return BadRequest("Advertisement not found.");
             advertisementExist.Body = advertisement.Body;
             advertisementExist.MediaURL = advertisement.MediaURL;
             advertisementExist.LinkURL = advertisement.LinkURL;
@@ -61,7 +61,7 @@ namespace advertisement.Controllers
         {
             Advertisement advertisementExist = await _context.Advertisement.FindAsync(id);
             if (advertisementExist == null)
-                return BadRequest("Hero not found.");
+                return BadRequest("Advertisement not found.");
             _context.Advertisement.Remove(advertisementExist);
             await _context.SaveChangesAsync();
 
