@@ -1,4 +1,4 @@
-const { Post, Comment, User } = require("../models");
+const { Post, Comment, User, PostLike } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
 const getPostWithComments = async (postUUID) => {
@@ -29,10 +29,26 @@ const getPostWithComments = async (postUUID) => {
       {
         model: User,
       },
+      {
+        model: PostLike,
+        as:'likes',
+        // include:[
+        //   {
+        //     model:Post,
+        //     as:"user"
+        //   }
+        // ]
+      },
     ],
   });
+
+  const postLikes = await PostLike.findAll({});
+
+  console.log(postLikes)
+
   return {
     post: post,
+    postLikes
   };
 };
 const getAllPostsWithComments = async () => {

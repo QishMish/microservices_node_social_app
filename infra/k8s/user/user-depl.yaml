@@ -15,6 +15,27 @@ spec:
       containers:
         - name: user
           image: qishhub/user-image
+          env:
+            - name: PORT
+              value: "4001"
+            - name: USER_POSTGRES_DB_NAME
+              value: "User"
+            - name: USER_POSTGRES_DB_USERNAME
+              value: "admin"
+            - name: USER_POSTGRES_DB_PASSWORD
+              value: "admin"
+            - name: USER_POSTGRES_DB_HOST
+              value: "user-postgres-srv"
+            - name: JWT_ACCESTOKEN_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_ACCESTOKEN_KEY
+            - name: JWT_REFRESHTOKEN_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_REFRESHTOKEN_KEY
 ---
 apiVersion: v1
 kind: Service

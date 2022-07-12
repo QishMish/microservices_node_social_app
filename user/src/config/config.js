@@ -6,12 +6,13 @@ const {
   NODE_ENV,
 } = require("./constants");
 
+
 module.exports = {
   development: {
-    username: "admin",
-    password: "admin",
-    database: "User",
-    host: "user-postgres-srv",
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    host: DB_HOST,
     dialect: "postgres",
     logging: false,
   },

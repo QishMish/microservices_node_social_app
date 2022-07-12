@@ -5,7 +5,7 @@ import { PORT } from "./config/constants";
 import logger from "./config/Logger";
 import HttpException from "./exceptions/http.exception";
 
-App.listen(PORT, () => {
+App.listen(Number(PORT), () => {
   console.log(`Auth service listening on the port ${PORT}`);
 });
 

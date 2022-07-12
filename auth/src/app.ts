@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req: Request, res: Response) => {
   res.send("success");
 });
+
 app.use(router);
 app.use(errorMiddleware);
 
