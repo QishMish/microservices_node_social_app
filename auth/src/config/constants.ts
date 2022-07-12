@@ -1,7 +1,7 @@
 const PORT = process.env.PORT;
-const DATABASE_URL = process.env.DATABASE_URL;
-const ACCESS_TOKEN_SECRET_KEY = process.env.ACCESS_TOKEN_SECRET_KEY;
-const REFRESH_TOKEN_SECRET_KEY = process.env.REFRESH_TOKEN_SECRET_KEY;
+const DATABASE_URL = process.env.AUTH_POSTGRES_URI;
+const ACCESS_TOKEN_SECRET_KEY = process.env.JWT_ACCESTOKEN_KEY;
+const REFRESH_TOKEN_SECRET_KEY = process.env.JWT_REFRESHTOKEN_KEY;
 
 export {
   PORT,

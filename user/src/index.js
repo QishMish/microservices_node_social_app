@@ -8,7 +8,7 @@ validateEnv();
 
 
 const main = async () => {
-    app.listen(PORT, () => {
+    app.listen(Number(PORT), () => {
     //server starting
     console.log(`User service listening on port ${PORT}!`);
     //postgres connection

@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /usr/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -8,5 +8,4 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8080
-CMD [ "node", "server.js" ]
+CMD [ "/bin/sh","run.sh" ]

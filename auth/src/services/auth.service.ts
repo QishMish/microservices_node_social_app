@@ -42,7 +42,7 @@ const refresh = async (refreshToken: string): Promise<IAuthGenericResponse> => {
   if (!user) throw new HttpException(404, "User not found");
 
   const found = user?.refreshTokens.some(
-    (reToken) => reToken.token === refreshToken
+    (reToken: any) => reToken.token === refreshToken
   );
 
   if (!found) throw new HttpException(404, "Token not found");

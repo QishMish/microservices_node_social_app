@@ -6,6 +6,7 @@ const {
   NODE_ENV,
 } = require("./constants");
 
+
 module.exports = {
   development: {
     username: DB_USERNAME,
