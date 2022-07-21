@@ -23,5 +23,6 @@ app.use(globalExceptionHandler);
 app.use("*", (req, res) => {
   res.json({ error: "route does not exist" });
 });
+console.log("first")
 
 module.exports = app;

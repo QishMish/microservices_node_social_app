@@ -4,6 +4,7 @@ const { getMethods } = require("../utils/helpers");
 const {
   throwHttpException,
 } = require("../../../newsFeed/src/exceptions/http.exception");
+const { HttpException } = require("../../../user/src/exceptions/http.exception");
 
 const getPostById = async (postId) => {
   const post = await Post.findOne({

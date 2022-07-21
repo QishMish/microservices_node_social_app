@@ -1,5 +1,6 @@
 const { User } = require("../models");
 const { v4: uuidv4 } = require("uuid");
+const { HttpException } = require("../exceptions/http.exception");
 
 const createUser = async (userFields) => {
   const { username, email, verified } = userFields;

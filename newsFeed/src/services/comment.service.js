@@ -1,5 +1,6 @@
 const { Comment } = require("../models");
 const { v4: uuidv4 } = require("uuid");
+const { HttpException } = require("../exceptions/http.exception");
 
 const getAllCommentsByPostId = async (postId) => {
   const comments = await Comment.findAll({
